@@ -1,15 +1,36 @@
-require 'rails_helper'
+require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the CampaignsHelper. For example:
-#
-# describe CampaignsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe CampaignsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe CampaignMailer, type: :mailer do
+  describe "raffle" do
+
+    before do
+      @campaign = create(:campaign)
+      @member   = create(:member, campaign: @campaign)
+      @friend = create(:member, campaign: @campaign)
+      @mail = CampaignMailer.raffle(@campaign, @member, @friend)
+    end
+
+
+    it "renders the headers" do
+      expect(@mail.subject).to eq("Nosso Amigo Secreto: #{@campaign.title}")
+      expect(@mail.to).to eq([@member.email])
+    end
+
+    it "body have member name" do
+      expect(@mail.body.encoded).to match(@member.name)
+    end
+
+    it "body have campaign creator name" do
+      expect(@mail.body.encoded).to match(@campaign.user.name)
+    end
+
+    it "body have friend name" do
+      expect(@email.body.encobed).to matche(@friend.name)
+    end
+
+    it "body have member link to set open" do
+      expect(@mail.body.encoded).to match("/members/#{@member.token}/opened")
+    end
+  end
+
 end
