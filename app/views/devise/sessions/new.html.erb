@@ -8,10 +8,12 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+
   <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
+
 
   <% if devise_mapping.rememberable? -%>
     <div class="field">
@@ -19,6 +21,7 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
+  
 
   <div class="actions">
     <button class="btn waves-effect waves-light" type="submit" name="action">Submit
