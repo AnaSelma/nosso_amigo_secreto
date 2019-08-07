@@ -38,8 +38,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'materialize-sass', '~> 0.100.2'
 gem 'material_icons'
-gem 'redis'
-gem 'sidekiq'
+gem 'redis', '~> 4.1.2'
+gem 'sidekiq', '~> 5.0.5'
 
 group :test do
   gem "factory_bot_rails"
